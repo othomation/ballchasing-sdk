@@ -27,7 +27,7 @@ class BallchasingClient implements BallchasingClientInterface
         ?Client $httpClient = null
     ) {
         $this->httpClient = $httpClient ?? new Client([
-            'base_uri' => $this->baseUrl,
+            'base_uri' => rtrim($this->baseUrl, '/') . '/',
             'timeout' => $this->timeout,
             'headers' => [
                 'Authorization' => $this->apiKey,
@@ -38,7 +38,7 @@ class BallchasingClient implements BallchasingClientInterface
 
     public function getReplays(array $filters = []): ReplayCollection
     {
-        $response = $this->makeRequest('GET', '/replays', [
+        $response = $this->makeRequest('GET', 'replays', [
             'query' => $filters
         ]);
 
@@ -47,7 +47,7 @@ class BallchasingClient implements BallchasingClientInterface
 
     public function getReplay(string $replayId): ReplayDetails
     {
-        $response = $this->makeRequest('GET', "/replays/{$replayId}");
+        $response = $this->makeRequest('GET', "replays/{$replayId}");
 
         return ReplayDetails::fromArray($response);
     }
@@ -58,7 +58,7 @@ class BallchasingClient implements BallchasingClientInterface
             throw BallchasingException::fileNotFound($filePath);
         }
 
-        $response = $this->makeRequest('POST', '/replays', [
+        $response = $this->makeRequest('POST', 'replays', [
             'multipart' => [
                 [
                     'name' => 'file',
@@ -93,7 +93,7 @@ class BallchasingClient implements BallchasingClientInterface
 
     public function getGroups(array $filters = []): GroupCollection
     {
-        $response = $this->makeRequest('GET', '/groups', [
+        $response = $this->makeRequest('GET', 'groups', [
             'query' => $filters
         ]);
 
@@ -102,14 +102,14 @@ class BallchasingClient implements BallchasingClientInterface
 
     public function getGroup(string $groupId): GroupDetails
     {
-        $response = $this->makeRequest('GET', "/groups/{$groupId}");
+        $response = $this->makeRequest('GET', "groups/{$groupId}");
 
         return GroupDetails::fromArray($response);
     }
 
     public function createGroup(array $data): GroupDetails
     {
-        $response = $this->makeRequest('POST', '/groups', [
+        $response = $this->makeRequest('POST', 'groups', [
             'json' => $data
         ]);
 
@@ -134,7 +134,7 @@ class BallchasingClient implements BallchasingClientInterface
 
     public function getMaps(): array
     {
-        return $this->makeRequest('GET', '/maps');
+        return $this->makeRequest('GET', 'maps');
     }
 
     private function makeRequest(string $method, string $endpoint, array $options = []): array

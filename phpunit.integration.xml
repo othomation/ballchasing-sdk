@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-         bootstrap="vendor/autoload.php"
+         bootstrap="tests/bootstrap-integration.php"
          colors="true"
          processIsolation="false"
          stopOnFailure="false"
@@ -13,8 +13,8 @@
          cacheDirectory=".phpunit.cache"
 >
     <testsuites>
-        <testsuite name="Unit">
-            <directory suffix="Test.php">./tests/Unit</directory>
+        <testsuite name="Integration">
+            <directory suffix="Test.php">./tests/Integration</directory>
         </testsuite>
     </testsuites>
     <source>
@@ -24,10 +24,7 @@
     </source>
     <php>
         <env name="APP_ENV" value="testing"/>
-        <env name="BALLCHASING_API_KEY" value="test-api-key"/>
-        <env name="BALLCHASING_BASE_URL" value="https://ballchasing.com/api"/>
-        <env name="BALLCHASING_TIMEOUT" value="30"/>
-        <env name="BALLCHASING_RETRY_ATTEMPTS" value="1"/>
-        <env name="BALLCHASING_RETRY_DELAY" value="100"/>
+        <!-- Load from .env file for real API key -->
+        <ini name="dotenv_path" value=".env"/>
     </php>
 </phpunit>
