@@ -94,24 +94,13 @@ composer analyse
 
 ### Versioning
 
-This package follows [Semantic Versioning](https://semver.org/). Use the built-in scripts to manage versions:
+This package follows [Semantic Versioning](https://semver.org/). To create a new release:
 
-```bash
-# Show current version
-composer version
-
-# Bump patch version (0.1.0 -> 0.1.1)
-composer version:patch
-
-# Bump minor version (0.1.0 -> 0.2.0)
-composer version:minor
-
-# Bump major version (0.1.0 -> 1.0.0)
-composer version:major
-
-# Run all checks before release (tests, format, analyse)
-composer release
-```
+1. Update the version in `composer.json`
+2. Run all checks: `composer release`
+3. Commit the changes
+4. Create a new git tag: `git tag v1.0.0`
+5. Push with tags: `git push --tags`
 
 **Note:** Since this is a beta package (0.x.x), the API may change between minor versions until we reach 1.0.0.
 
