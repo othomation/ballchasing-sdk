@@ -27,7 +27,7 @@ class BallchasingClient implements BallchasingClientInterface
         ?Client $httpClient = null
     ) {
         $this->httpClient = $httpClient ?? new Client([
-            'base_uri' => rtrim($this->baseUrl, '/') . '/',
+            'base_uri' => rtrim($this->baseUrl, '/').'/',
             'timeout' => $this->timeout,
             'headers' => [
                 'Authorization' => $this->apiKey,
@@ -39,7 +39,7 @@ class BallchasingClient implements BallchasingClientInterface
     public function getReplays(array $filters = []): ReplayCollection
     {
         $response = $this->makeRequest('GET', 'replays', [
-            'query' => $filters
+            'query' => $filters,
         ]);
 
         return ReplayCollection::fromArray($response);
@@ -54,7 +54,7 @@ class BallchasingClient implements BallchasingClientInterface
 
     public function uploadReplay(string $filePath, array $metadata = []): ReplayDetails
     {
-        if (!file_exists($filePath)) {
+        if (! file_exists($filePath)) {
             throw BallchasingException::fileNotFound($filePath);
         }
 
@@ -65,11 +65,11 @@ class BallchasingClient implements BallchasingClientInterface
                     'contents' => fopen($filePath, 'r'),
                     'filename' => basename($filePath),
                 ],
-                ...array_map(fn($key, $value) => [
+                ...array_map(fn ($key, $value) => [
                     'name' => $key,
                     'contents' => $value,
-                ], array_keys($metadata), $metadata)
-            ]
+                ], array_keys($metadata), $metadata),
+            ],
         ]);
 
         return ReplayDetails::fromArray($response);
@@ -85,7 +85,7 @@ class BallchasingClient implements BallchasingClientInterface
     public function updateReplay(string $replayId, array $data): ReplayDetails
     {
         $response = $this->makeRequest('PATCH', "/replays/{$replayId}", [
-            'json' => $data
+            'json' => $data,
         ]);
 
         return ReplayDetails::fromArray($response);
@@ -94,7 +94,7 @@ class BallchasingClient implements BallchasingClientInterface
     public function getGroups(array $filters = []): GroupCollection
     {
         $response = $this->makeRequest('GET', 'groups', [
-            'query' => $filters
+            'query' => $filters,
         ]);
 
         return GroupCollection::fromArray($response);
@@ -110,7 +110,7 @@ class BallchasingClient implements BallchasingClientInterface
     public function createGroup(array $data): GroupDetails
     {
         $response = $this->makeRequest('POST', 'groups', [
-            'json' => $data
+            'json' => $data,
         ]);
 
         return GroupDetails::fromArray($response);
@@ -119,7 +119,7 @@ class BallchasingClient implements BallchasingClientInterface
     public function updateGroup(string $groupId, array $data): GroupDetails
     {
         $response = $this->makeRequest('PATCH', "/groups/{$groupId}", [
-            'json' => $data
+            'json' => $data,
         ]);
 
         return GroupDetails::fromArray($response);

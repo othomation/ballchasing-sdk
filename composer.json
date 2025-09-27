@@ -47,19 +47,19 @@
         "version:patch": [
             "@version",
             "echo \"Updating patch version...\"",
-            "php -r \"$c=json_decode(file_get_contents('composer.json'),1);$v=explode('.',$c['version']);$v[2]++;$c['version']=implode('.',$v);file_put_contents('composer.json',json_encode($c,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));\"",
+            "php -r \"$c=json_decode(file_get_contents('composer.json'),true);$v=explode('.',$c['version']);$v[2]++;$c['version']=implode('.',$v);file_put_contents('composer.json',json_encode($c,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));\"",
             "@version"
         ],
         "version:minor": [
             "@version",
             "echo \"Updating minor version...\"",
-            "php -r \"$c=json_decode(file_get_contents('composer.json'),1);$v=explode('.',$c['version']);$v[1]++;$v[2]=0;$c['version']=implode('.',$v);file_put_contents('composer.json',json_encode($c,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));\"",
+            "php -r \"$c=json_decode(file_get_contents('composer.json'),true);$v=explode('.',$c['version']);$v[1]++;$v[2]=0;$c['version']=implode('.',$v);file_put_contents('composer.json',json_encode($c,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));\"",
             "@version"
         ],
         "version:major": [
             "@version",
             "echo \"Updating major version...\"",
-            "php -r \"$c=json_decode(file_get_contents('composer.json'),1);$v=explode('.',$c['version']);$v[0]++;$v[1]=0;$v[2]=0;$c['version']=implode('.',$v);file_put_contents('composer.json',json_encode($c,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));\"",
+            "php -r \"$c=json_decode(file_get_contents('composer.json'),true);$v=explode('.',$c['version']);$v[0]++;$v[1]=0;$v[2]=0;$c['version']=implode('.',$v);file_put_contents('composer.json',json_encode($c,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));\"",
             "@version"
         ],
         "release": [

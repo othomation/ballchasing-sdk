@@ -12,7 +12,7 @@ class GroupCollection
     public static function fromArray(array $data): self
     {
         $groups = array_map(
-            fn(array $group) => GroupDetails::fromArray($group),
+            fn (array $group) => GroupDetails::fromArray($group),
             $data['list'] ?? []
         );
 

@@ -12,7 +12,7 @@ class ReplayCollection
     public static function fromArray(array $data): self
     {
         $replays = array_map(
-            fn(array $replay) => ReplayDetails::fromArray($replay),
+            fn (array $replay) => ReplayDetails::fromArray($replay),
             $data['list'] ?? []
         );
 

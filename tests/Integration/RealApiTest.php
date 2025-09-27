@@ -32,7 +32,7 @@ class RealApiTest extends IntegrationTestCase
         $this->assertIsArray($result->replays);
         $this->assertGreaterThanOrEqual(0, $result->count);
 
-        if (!empty($result->replays)) {
+        if (! empty($result->replays)) {
             $replay = $result->replays[0];
             $this->assertNotEmpty($replay->id);
             // title peut être null selon l'API

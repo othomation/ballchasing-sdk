@@ -2,10 +2,10 @@
 
 namespace Lucie\BallchasingLaravel\Contracts;
 
-use Lucie\BallchasingLaravel\DTOs\ReplayCollection;
-use Lucie\BallchasingLaravel\DTOs\ReplayDetails;
 use Lucie\BallchasingLaravel\DTOs\GroupCollection;
 use Lucie\BallchasingLaravel\DTOs\GroupDetails;
+use Lucie\BallchasingLaravel\DTOs\ReplayCollection;
+use Lucie\BallchasingLaravel\DTOs\ReplayDetails;
 
 interface BallchasingClientInterface
 {
@@ -30,5 +30,4 @@ interface BallchasingClientInterface
     public function deleteGroup(string $groupId): bool;
 
     public function getMaps(): array;
-
 }

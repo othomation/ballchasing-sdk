@@ -2,8 +2,8 @@
 
 namespace Lucie\BallchasingLaravel\Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
 use Lucie\BallchasingLaravel\BallchasingServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra
 {

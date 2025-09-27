@@ -2,12 +2,13 @@
 
 namespace Lucie\BallchasingLaravel\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Lucie\BallchasingLaravel\Services\BallchasingClient;
+use PHPUnit\Framework\TestCase;
 
 abstract class IntegrationTestCase extends TestCase
 {
     protected BallchasingClient $client;
+
     private static bool $apiConnectivityTested = false;
 
     protected function setUp(): void
@@ -16,9 +17,9 @@ abstract class IntegrationTestCase extends TestCase
 
         $apiKey = $this->getApiKey();
 
-        if (!$this->hasValidApiKey($apiKey)) {
+        if (! $this->hasValidApiKey($apiKey)) {
             $this->markTestSkipped(
-                'Integration tests require a valid API key. ' .
+                'Integration tests require a valid API key. '.
                 'Copy .env.testing to .env and add your BALLCHASING_API_KEY'
             );
         }
@@ -29,10 +30,10 @@ abstract class IntegrationTestCase extends TestCase
         );
 
         // Test API connectivity only once
-        if (!self::$apiConnectivityTested) {
-            if (!$this->isApiKeyWorking()) {
+        if (! self::$apiConnectivityTested) {
+            if (! $this->isApiKeyWorking()) {
                 $this->markTestSkipped(
-                    'API key appears to be invalid or API is not accessible. ' .
+                    'API key appears to be invalid or API is not accessible. '.
                     'Please check your BALLCHASING_API_KEY or try again later.'
                 );
             }
@@ -49,7 +50,7 @@ abstract class IntegrationTestCase extends TestCase
 
     private function hasValidApiKey(string $apiKey): bool
     {
-        return $apiKey !== 'test-api-key' && !empty($apiKey);
+        return $apiKey !== 'test-api-key' && ! empty($apiKey);
     }
 
     private function isApiKeyWorking(): bool
@@ -57,6 +58,7 @@ abstract class IntegrationTestCase extends TestCase
         try {
             // Quick test with maps endpoint (lightweight)
             $this->client->getMaps();
+
             return true;
         } catch (\Exception $e) {
             return false;

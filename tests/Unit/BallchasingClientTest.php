@@ -6,20 +6,21 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use Lucie\BallchasingLaravel\Exceptions\BallchasingException;
 use Lucie\BallchasingLaravel\Services\BallchasingClient;
 use Lucie\BallchasingLaravel\Tests\TestCase;
-use Lucie\BallchasingLaravel\Exceptions\BallchasingException;
 
 class BallchasingClientTest extends TestCase
 {
     private BallchasingClient $client;
+
     private MockHandler $mockHandler;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->mockHandler = new MockHandler();
+        $this->mockHandler = new MockHandler;
         $handlerStack = HandlerStack::create($this->mockHandler);
         $httpClient = new Client(['handler' => $handlerStack]);
 
@@ -47,10 +48,10 @@ class BallchasingClientTest extends TestCase
                 [
                     'id' => 'replay-1',
                     'title' => 'Test Replay 1',
-                    'created' => '2024-01-01T00:00:00Z'
-                ]
+                    'created' => '2024-01-01T00:00:00Z',
+                ],
             ],
-            'count' => 1
+            'count' => 1,
         ];
 
         $this->mockHandler->append(
@@ -71,7 +72,7 @@ class BallchasingClientTest extends TestCase
             'title' => 'Test Replay',
             'created' => '2024-01-01T00:00:00Z',
             'map_code' => 'stadium_p',
-            'duration' => 300
+            'duration' => 300,
         ];
 
         $this->mockHandler->append(
@@ -116,10 +117,10 @@ class BallchasingClientTest extends TestCase
                 [
                     'id' => 'group-1',
                     'name' => 'Test Group',
-                    'created' => '2024-01-01T00:00:00Z'
-                ]
+                    'created' => '2024-01-01T00:00:00Z',
+                ],
             ],
-            'count' => 1
+            'count' => 1,
         ];
 
         $this->mockHandler->append(
