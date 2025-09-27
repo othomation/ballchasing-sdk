@@ -8,6 +8,7 @@ use Lucie\BallchasingLaravel\Services\BallchasingClient;
 abstract class IntegrationTestCase extends TestCase
 {
     protected BallchasingClient $client;
+    private static bool $apiConnectivityTested = false;
 
     protected function setUp(): void
     {
@@ -22,14 +23,20 @@ abstract class IntegrationTestCase extends TestCase
             );
         }
 
-        $this->client = new BallchasingClient($apiKey);
+        $this->client = new BallchasingClient(
+            apiKey: $apiKey,
+            timeout: 60  // Augmenter le timeout pour les tests d'intégration
+        );
 
-        // Test API connectivity before running tests
-        if (!$this->isApiKeyWorking()) {
-            $this->markTestSkipped(
-                'API key appears to be invalid or API is not accessible. ' .
-                'Please check your BALLCHASING_API_KEY or try again later.'
-            );
+        // Test API connectivity only once
+        if (!self::$apiConnectivityTested) {
+            if (!$this->isApiKeyWorking()) {
+                $this->markTestSkipped(
+                    'API key appears to be invalid or API is not accessible. ' .
+                    'Please check your BALLCHASING_API_KEY or try again later.'
+                );
+            }
+            self::$apiConnectivityTested = true;
         }
     }
 

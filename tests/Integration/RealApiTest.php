@@ -35,7 +35,7 @@ class RealApiTest extends IntegrationTestCase
         if (!empty($result->replays)) {
             $replay = $result->replays[0];
             $this->assertNotEmpty($replay->id);
-            $this->assertNotEmpty($replay->title);
+            // title peut être null selon l'API
             $this->assertNotEmpty($replay->created);
         }
     }

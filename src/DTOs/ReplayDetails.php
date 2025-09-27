@@ -6,7 +6,7 @@ class ReplayDetails
 {
     public function __construct(
         public readonly string $id,
-        public readonly string $title,
+        public readonly ?string $title,
         public readonly string $created,
         public readonly ?string $mapCode = null,
         public readonly ?int $duration = null,
@@ -14,7 +14,7 @@ class ReplayDetails
         public readonly ?string $downloadLink = null,
         public readonly ?array $teams = null,
         public readonly ?array $players = null,
-        public readonly ?array $visibility = null,
+        public readonly mixed $visibility = null,
         public readonly ?array $uploader = null,
         public readonly ?string $status = null
     ) {}
@@ -23,7 +23,7 @@ class ReplayDetails
     {
         return new self(
             id: $data['id'],
-            title: $data['title'],
+            title: $data['title'] ?? null,
             created: $data['created'],
             mapCode: $data['map_code'] ?? null,
             duration: $data['duration'] ?? null,
