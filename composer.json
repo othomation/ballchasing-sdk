@@ -2,6 +2,7 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "lucie/ballchasing-laravel",
     "description": "Laravel package for Ballchasing.com API integration",
+    "version": "0.1.0",
     "keywords": ["laravel", "ballchasing", "rocket-league", "api", "sdk"],
     "type": "library",
     "license": "MIT",
@@ -41,7 +42,32 @@
         "test-integration": "vendor/bin/phpunit --configuration=phpunit.integration.xml",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
         "format": "vendor/bin/pint",
-        "analyse": "vendor/bin/phpstan analyse"
+        "analyse": "vendor/bin/phpstan analyse",
+        "version": "echo \"Current version: $(grep '\"version\"' composer.json | cut -d'\"' -f4)\"",
+        "version:patch": [
+            "@version",
+            "echo \"Updating patch version...\"",
+            "php -r \"$c=json_decode(file_get_contents('composer.json'),1);$v=explode('.',$c['version']);$v[2]++;$c['version']=implode('.',$v);file_put_contents('composer.json',json_encode($c,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));\"",
+            "@version"
+        ],
+        "version:minor": [
+            "@version",
+            "echo \"Updating minor version...\"",
+            "php -r \"$c=json_decode(file_get_contents('composer.json'),1);$v=explode('.',$c['version']);$v[1]++;$v[2]=0;$c['version']=implode('.',$v);file_put_contents('composer.json',json_encode($c,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));\"",
+            "@version"
+        ],
+        "version:major": [
+            "@version",
+            "echo \"Updating major version...\"",
+            "php -r \"$c=json_decode(file_get_contents('composer.json'),1);$v=explode('.',$c['version']);$v[0]++;$v[1]=0;$v[2]=0;$c['version']=implode('.',$v);file_put_contents('composer.json',json_encode($c,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES));\"",
+            "@version"
+        ],
+        "release": [
+            "@test",
+            "@format",
+            "@analyse",
+            "echo \"All checks passed. Ready for release!\""
+        ]
     },
     "extra": {
         "laravel": {
