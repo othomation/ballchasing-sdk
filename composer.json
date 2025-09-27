@@ -1,8 +1,8 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "lucie/ballchasing-laravel",
+    "name": "lucie/ballchasing-sdk",
     "description": "Laravel package for Ballchasing.com API integration",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "keywords": ["laravel", "ballchasing", "rocket-league", "api", "sdk"],
     "homepage": "https://github.com/othomation/ballchasing-sdk",
     "type": "library",
